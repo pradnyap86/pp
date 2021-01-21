@@ -1,0 +1,204 @@
+Angular is Javascript frmanework which allow us to create reactive single page application.
+- angular 2 is complete rewrite (around 2015-16) of angular 1
+
+to install angular
+-istall node.js
+- npm install -g @angular/cli (npm install -g @angular/cli@latest will install latest version)
+- ng new my-first-app  (to create new project)
+- cd my-first-app
+- ng serve (to run ur project)
+
+IDE  used for angular project
+-webstorm
+-vs code
+
+
+To install bootstrap into your project
+	- npm install --save bootstrap
+	- .angular-cli.json/angular.json file  --> styles array inside projects > architects > build > styles, add path to bootstrap file path
+		eg. "../node-modules/bootstrap/dist/css/bootstrap.min.css"
+	-ng serve
+
+Component
+
+	Component can be created in app folder 
+	- app.component is main component, which is used to start the server.
+	- html code of app.component .html goes into index.html file (<app-root></app-root>)
+
+	Component name : abc
+	ts fine name : abc.component.ts
+	html file name : abc.component.html
+	class to be created in component : AbcComponent
+
+	- app module : angular uses components to buid web pages, and uses  app modules to bundle diffrent pieces or functions like components into packages
+
+	- to create new component from cli
+		- ng generate component servers 	// server is name of component which is to be created
+		- ng g c servers 					// shortucut to above comaand
+
+		
+	- After creating component manually:
+		- export class serverComponent{}  (server is component name)
+		- import component from core/angular
+			import { component } from '@angular/core'
+		- component decoration
+			@component({})
+
+		
+	- template has be to be there in the decoration part of component (mandaroty part for component decoration)
+
+		selctor can be written in below 3 ways
+
+		1	selector: 'app-server',  // by this u can cal directly an element in html template.
+				eg.		<app-server></app-server>
+				
+		2	selector: '[app-server]', // by the way u can use the selector as a attribute in html element
+				eg.		<div app-server><>/div
+				
+		3	selector:	'.app-server'	// by this way u can use the selector as a class in the html element
+				eg. 	<div class="app-server"></div>
+				
+			
+	- Example of component decoration
+		@Component({
+		  selector: 'app-server',
+		  templateUrl: './server.component.html',    <-- // here u can write template if need to write internal single line html code within '' or use `` for multiline HTML code
+		  styleUrls: ['./server.component.css']	 	<-- // here u can write styles if need to write internal single line css within '' or use `` for multiline css
+		})
+		
+	- After creating manual component u need to add its import in app.modules.ts file, to tell app module to use newly created component
+		import {serverComponent} from './server/server.component';
+		@ngModule({
+			declaration: [
+				Appcomponent,
+				serverComponent  <-- newly created component
+			]
+		})		
+		
+		
+Data binding:
+
+https://www.c-sharpcorner.com/article/data-binding-in-angular-6/
+https://www.c-sharpcorner.com/learn/angular-8-in-10-days
+
+1. String interpolation
+
+	String Interpolation is a one-way data-binding which is used to output the data or function from a TypeScript code to HTML template (view). It uses the template expression in double curly braces to display the data from the component to the view.
+
+	For Example – {{ data }}
+				  {{getdata()}}
+				  
+				  data in .ts file will be inside export class serverComponent{
+					data = pp;
+				  }
+				  
+				  getdata(){
+					return this.data;
+				  }
+				  
+				  for both the above method output will same
+				  
+		
+2. Property binding
+
+	Property binding is also a one-way data binding, where we bind a property of a DOM element to a field which is a property we define in our component typescript code. Behind the scene, Angular converts string interpolation into property binding.
+
+For Example – <img [src]=”imgUrl” />
+
+	Property binding is the primary way of binding data in Angular. The square braces are used to bind data to a property of an element, the trick is to put the property onto the element wrapped in brackets: [property].
+
+			class {
+				this.srcURL = "http://pexels/image.jpg"
+			}
+
+			<img [src]="srcURL" />
+				|
+				|
+			<img src="http://pexels/image.jpg" />
+		
+Note
+String Interpolation and Property binding both are one-way binding. That means if field value in the component change, Angular will automatically update the DOM. But any changes in the DOM will not be reflected back in the component. 
+		
+3. event binding
+
+	When a user interacts with an application in the form of a keyboard movement, a mouse click, or a mouseover, it generates an event. These events need to be handled to perform some kind of action. This is where event binding comes into picture.
+	
+	Following is the syntax to define a button and add a function to it. :
+
+	(click)="myClickFunction($event)"
+	(click)="myClickFunction()"
+	
+	Angular provides us with other types of binding, i.e., event binding, which is used to handle the events raised from the DOM like button click, mouse move etc. Let’s understand this with the help of an example –
+
+Suppose we have a button in the HTML template and we want to handle the click event of this button. To implement event binding, we will bind click event of a button with a method of the component.
+
+$event is specifically used to get data of perticular when event occurs, in case of (input) it gives value of input, in case of (click) it may give x and y co-ordinates of page
+
+	eg. <input type="text" (input)="changeName($event)">  ==> in html
+		
+		name="";
+		
+		changeName(event : Event){
+			this.name = (<HTMLInputElemnt>.event.target).value;
+		}
+
+4. Tow way data binding
+
+	Angular provides a very nice feature; i.e., two-way data binding. As of now, we have seen how to bind component data to view using one-way bindings. That means any change in the template(view) will not be reflected in the component typescript code.
+
+	Now, two-way binding has a feature to update data from component to view and vice-versa.
+	Data Binding In Angular 6 
+
+	Syntax - For two-way data binding, we combine property binding and event binding both. Also, we can call “Banana in the Box”.
+
+	[(ngModel)] = ”[property of your component]”
+
+	Important Note:
+	To implement two-way data binding, you need to enable the ngModel directive and this depends upon FormsModule in angular/forms package. So you need to add FormsModule in imports[] array in the AppModule.
+	
+	
+Directives:
+
+	Directives are instructions in the DOM.
+	
+	Directives in Angular is a js class, which is declared as @directive. We have 3 directives in Angular. The directives are listed below -
+		-Component Directives
+			These form the main class having details of how the component should be processed, instantiated and used at runtime.
+
+		-Structural Directives
+			A structure directive basically deals with manipulating the dom elements. Structural directives have a * sign before the directive. 
+			For example, *ngIf and *ngFor.
+		
+		-Attribute Directives
+			Attribute directives deal with changing the look and behavior of the dom element. You can create your own directives as shown below.
+
+	The command to create the custom directive using the command line is -
+
+	ng g directive nameofthedirective
+	e.g
+	ng g directive changeText
+	
+Encapsulation:
+	It allows to apply css throught all components by using below code in compoennt declaration:
+		@Component({
+			selector: 'app-mail-template',
+			templateUrl: './mail-template.component.html',
+			styleUrls: ['./mail-template.component.scss'],
+			encapsulation : ViewEncapsulation.None  // Due to this none property no unique attribute gets added to the selector and css appllied to it gets applied to all the selectors in the page
+		})
+		
+- how to use ngClass
+	<div [ngClass]="{'classname' : condition}"></div>
+	<div [ngClass]="{'firstClass': true, 'secondClass': true, 'thirdClass': false}"></div>
+	<div [ngClass]="{'class1 class2 class3' : true}"></div>
+	 [ngClass]="{'textRed': !isTabValid('costing-detail') || remainingAmtError}"
+	
+- To use ngModule on input u need to import FormModule in imports of moduls.ts file
+- Nwely created component should b imported to module.ts file and it should go in declaration part
+- model.ts files has structre array of how u r going to store data about perticular thing
+- how to use ngIf
+	<ng-container *ngIf="foo === 1;else second"></ng-container>
+	<ng-template #second>
+		<ng-container *ngIf="foo === 2;else third"></ng-container>
+	</ng-template>
+	<ng-template #third></ng-template>

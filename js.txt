@@ -1,0 +1,117 @@
+-	Placing scripts at the bottom of the <body> element improves the display speed, because script interpretation slows down the display.
+-	Changing the innerHTML property of an HTML element is a common way to display data in HTML.
+-	Using document.write() after an HTML document is loaded, will delete all existing HTML:
+-	In JavaScript, the window object is the global scope object, that means that variables, properties, and methods by default belongs to the window object. This also means that specifying the window keyword is optional.
+-	The JavaScript syntax defines two types of values: Fixed values and variable values.
+-	Fixed values are called literals. Variable values are called variables.
+-	JavaScript Literals
+		-Numbers 
+		-Strings 
+-	JavaScript variables are containers for storing data values.
+-	After the declaration, the variable has no value (technically it has the value of undefined).
+-	If you re-declare a JavaScript variable, it will not lose its value.
+-	If you put a number in quotes, the rest of the numbers will be treated as strings, and concatenated.
+	eg: var x = "5" + 2 + 3;
+		=>	x = 523;
+	eg: var x = 2 + 3 + "5";
+		=>	x = 55;
+-	The addition assignment operator (+=) adds a value to a variable.
+	eg: var x = 10;
+		x += 5;
+		=> x = 15;
+-	JavaScript Comparison Operators
+	eg:	==	equal to
+		===	equal value and equal type
+-	In JavaScript, a variable without a value, has the value undefined. The type is also undefined.
+-	You can consider it a bug in JavaScript that typeof null is an object. It should be null.
+-	undefined and null are equal in value but different in type:
+		- typeof undefined           // undefined
+		- typeof null                // object
+		- null === undefined         // false
+		- null == undefined          // true
+
+-	Local Variables : Variables declared within a JavaScript function, become LOCAL to the function.
+		Local variables can only be accessed from within the function.
+
+			Example
+			// code here can NOT use carName
+
+			function myFunction() {
+			  var carName = "Volvo";
+			  // code here CAN use carName
+			}
+
+			// code here can NOT use carName
+
+-	Common HTML Events
+	Event		: Description
+	onchange	: An HTML element has been changed
+	onclick		: The user clicks an HTML element
+	onmouseover	: The user moves the mouse over an HTML element
+	onmouseout	: The user moves the mouse away from an HTML element
+	onkeydown	: The user pushes a keyboard key
+	onload		: The browser has finished loading the page
+
+-	var x = "John";             
+	var y = new String("John");
+
+	// (x === y) is false because x and y have different types (string and object)
+	Or even worse. Objects cannot be compared:
+
+	Example
+	var x = new String("John");             
+	var y = new String("John");
+
+	// (x == y) is false because x and y are different objects
+	Example
+	var x = new String("John");             
+	var y = new String("John");
+
+	// (x === y) is false because x and y are different objects
+	
+-	Note the difference between (x==y) and (x===y).
+	Comparing two JavaScript objects will always return false.
+	
+-	string methods
+		- length property returns the length of a string
+		- indexOf() method returns the index of (the position of) the first occurrence of a specified text in a string:
+		- lasteIndexOf() method returns the index of the last occurrence of a specified text in a string:
+		- search() method searches a string for a specified value and returns the position of the match:
+		- slice(start, end) extracts a part of a string and returns the extracted part in a new string.
+		- substring(start, end)
+		- substr(start, length) : the second parameter specifies the length of the extracted part.
+		- replace()
+			- To replace all matches, use a regular expression with a /g flag (global match):
+				Example
+				str = "Please visit Microsoft and Microsoft!";
+				var n = str.replace(/Microsoft/g, "W3Schools");
+		- toUpperCase()
+		- toLowerCase()
+		- concat() joins two or more strings:
+			Example
+			var text1 = "Hello";
+			var text2 = "World";
+			var text3 = text1.concat(" ", text2);
+		- trim() method removes whitespace from both sides of a string:
+		- charAt() method returns the character at a specified index (position) in a string
+		- charCodeAt() method returns the unicode of the character at a specified index in a string
+		- split() string can be converted to an array with the split() method
+		
+-	NaN is a JavaScript reserved word indicating that a number is not a legal number.
+		var x = 100 / "Apple";  // x will be NaN (Not a Number)
+		
+		var x = NaN;
+		var y = 5;
+		var z = x + y;         // z will be NaN
+		Or the result might be a concatenation:
+
+		Example
+		var x = NaN;
+		var y = "5";
+		var z = x + y;         // z will be NaN5
+		NaN is a number: typeof NaN returns number:
+
+		Example
+		typeof NaN;            // returns "number"
+
+-	
